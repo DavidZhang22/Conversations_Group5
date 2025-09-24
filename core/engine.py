@@ -15,6 +15,7 @@ class Engine:
 		subjects: int,
 		memory_size: int,
 		conversation_length: int,
+		params: list[float] = [1, 1, 1, 1, 1],
 	) -> None:
 		self.subjects = [i for i in range(subjects)]
 		self.memory_size = memory_size
@@ -33,6 +34,7 @@ class Engine:
 				ctx=GameContext(
 					conversation_length=conversation_length, number_of_players=player_count
 				),
+				**({'params': params} if player.__name__ == 'Player5' else {}),
 			)
 			for id, player in zip(list(self.snapshots.keys()), players, strict=True)
 		]
